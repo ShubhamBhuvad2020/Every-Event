@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('include/Header')%>
+    <title>Upcoming-Events</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%-
+    include('include/Navbar',{searchBar:'false',addEventBtn:'true',Events:'false',logoutBtn:'true',Home:'true'})%>
+    <!-- Navbar -->
+
+    <!-- Add Event Form -->
+    <div class="container">
+      <h2 class="text-center pt-4 pb-2">Upcoming-Events</h2>
+      <hr class="bg-dark" />
+      <% if(data.length>0) {%>
+      <span class="text-dark h4">Current Events</span>
+      <% data.forEach(event=>{%>
+      <!-- Event Card -->
+      <div class="flex-row">
+        <div class="d-flex border p-1 my-2">
+          <div class="col-2">
+            <div class="event-date my-2">
+              <div class="event-date__month">
+                <%= moment(event.Edate).format("Do") %>
+              </div>
+              <div class="event-date__day">
+                <%= moment(event.Edate).format("MMMM") %>
+              </div>
+              <div class="event-date__year">
+                <%= moment(event.Edate).format("YYYY") %>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 py-3">
+            <h2 class="my-4"><%= event.Ename %></h2>
+          </div>
+          <div class="col-2 py-3">
+            <h5 class="my-4">
+              <% Time = to12Hours(event.starttime) %> <%-
+              include('include/TimeCovnertor',{Time:Time})%> TO <% Time =
+              to12Hours(event.endtime) %> <%-
+              include('include/TimeCovnertor',{Time:Time})%>
+            </h5>
+          </div>
+          <a href="/attendance/<%= event._id%>">
+            <div class="col-2 py-3">
+              <div class="my-4 btn btn-danger">Attendance</div>
+            </div>
+          </a>
+          <a href="/attendance/delete/<%= event._id%>">
+            <div class="col-2 py-3">
+              <div class="my-4 btn btn-danger mx-2">
+                <i class="bi bi-trash-fill"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Event Card -->
+      <%})%> <%}else{%>
+      <div class="alert alert-danger display-5" role="alert">
+        Opps ! <a href="#" class="alert-link">Not Event Found</a>. Please add
+        event.
+      </div>
+      <%}%>
+    </div>
+
+    <!-- Add Event Form -->
+    <!-- Footer -->
+    <%- include('include/Footer')%>
+    <!-- Footer -->
+  </body>
+</html>

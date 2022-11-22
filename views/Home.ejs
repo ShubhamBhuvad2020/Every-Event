@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('include/Header')%>
+    <title>Events</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%-
+    include('include/Navbar',{searchBar:'true',addEventBtn:'false',Events:'true',logoutBtn:'true',Home:'false'})%>
+    <!-- Navbar -->
+
+    <div class="container">
+      <h2 class="text-center pt-4 pb-2">Events</h2>
+      <!-- Months -->
+      <div id="filters" class="button-group">
+        <button
+          class="btn btn-outline-danger is-checked active"
+          data-filter="*"
+        >
+          All Months
+        </button>
+        <button class="btn btn-outline-danger" data-filter=".Jan">January</button>
+        <button class="btn btn-outline-danger" data-filter=".Feb">February</button>
+        <button class="btn btn-outline-danger" data-filter=".Mar">March</button>
+        <button class="btn btn-outline-danger" data-filter=".Apr">April</button>
+        <button class="btn btn-outline-danger" data-filter=".May">May</button>
+        <button class="btn btn-outline-danger" data-filter=".Jun">June</button>
+        <button class="btn btn-outline-danger" data-filter=".Jul">July</button>
+        <button class="btn btn-outline-danger" data-filter=".Aug">August</button>
+        <button class="btn btn-outline-danger" data-filter=".Sep">September</button>
+        <button class="btn btn-outline-danger" data-filter=".Oct">October</button>
+        <button class="btn btn-outline-danger" data-filter=".Nov">November</button>
+        <button class="btn btn-outline-danger" data-filter=".Dec">December</button>
+      </div>
+      <!-- Months -->
+
+      <hr class="bg-dark" />
+  
+      <% if(data.length>0) {%>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 event-months" id="EventTable" >
+          <% data.forEach(event=>{%>
+            <div class="col mix <%=  moment(event.Edate).format('MMM') %>">
+              <div class="card border-rounder shadow border-danger h-100 rounded" >
+                <div class="h1 text-center bg-danger text-light">
+                  <%= moment(event.Edate).format("MMMM") %>
+                </div>
+                <div class="card-body" >
+                  <h5 class="card-title"><%= event.Ename%></h5>
+                  <p class="card-text">
+                    <span
+                      >Host By-
+                      <span class="h6"><%= event.hostname%></p></span
+                    >
+                    <span
+                      >Date-
+                      <span class="h6"><%= moment(event.Edate).format("DD-MMM-YY") %> (<%= moment(event.Edate).format("dddd") %>)</p></span
+                    >
+                  </p>
+                  <a
+                    href="/EventDetails/<%= event._id %>"
+                    class="btn btn-outline-danger d-flex justify-content-center"
+                  >
+                    View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          <%})%> <%}else{%>
+        </div>
+      </div>
+      <div class="alert alert-danger text-center display-5" role="alert">
+        Opps ! <a href="#" class="alert-link">Not Event Found</a>
+      </div>
+   
+      <%}%>
+   
+    <!-- scripts -->
+    <%- include('include/Footer')%>
+    <script>
+      $(document).ready(function () {
+      // Event Search bar
+      $("#EventTitle").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#EventTable .col").filter(function () {
+          $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1);
+        });
+      });
+
+      //   months filter
+      var mixer = mixitup(".event-months", {
+        animation: {
+          duration: 600,
+        },
+      });
+    });
+    
+    </script>
+    <!-- scripts -->
+  </body>
+</html>

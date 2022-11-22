@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Header -->
+    <%- include('include/Header')%>
+    <!-- Header -->
+    <title>Add Events</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%-
+    include('include/Navbar',{searchBar:'false',addEventBtn:'false',Events:'true',Home:'true',logoutBtn:'true'})%>
+    <!-- Navbar -->
+
+    <!-- Add Event Form -->
+
+    <div class="container py-5 w-50">
+      <h2 class="py-4">Add Event</h2>
+      <% if(AlreadySaved) {%>
+      <div class="alert alert-danger" role="alert">
+        Please give another name to event!
+        <br />This is already saved in database..
+      </div>
+      <%}%>
+      <form method="post" action="/postEvent">
+        <div class="form-group my-2">
+          <label for="EventName" class="form-label h5 text-secondary"
+            >Event Name <span class="pt-3 text-danger">*</span>
+          </label>
+          <input
+            required
+            type="text"
+            class="form-control input-lg"
+            id="exampleInputeventname"
+            name="eName"
+            autocomplete="off"
+            placeholder="Enter Event Name"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="date" class="form-label h5 text-secondary"
+            >Date <span class="pt-3 text-danger">*</span></label
+          >
+          <input
+            required
+            type="date"
+            class="form-control input-lg"
+            id="exampleInputdate"
+            name="eDate"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="starttime" class="form-label h5 text-secondary"
+            >Start Time <span class="pt-3 text-danger">*</span></label
+          >
+          <input
+            required
+            type="time"
+            class="form-control input-lg"
+            id="exampleInputstarttime"
+            name="eStart"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="endtime" class="form-label h5 text-secondary"
+            >End Time <span class="pt-3 text-danger">*</span></label
+          >
+          <input
+            required
+            type="time"
+            class="form-control input-lg"
+            id="exampleInputendtime"
+            name="eEnd"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="hostname" class="form-label h5 text-secondary"
+            >Host Name <span class="pt-3 text-danger">*</span></label
+          >
+          <input
+            required
+            type="text"
+            class="form-control input-lg"
+            id="exampleInputhostname"
+            name="eHostName"
+            placeholder="Enter Host Name"
+          />
+        </div>
+        <button type="submit" class="btn btn-danger my-2" name="create">
+          Add
+        </button>
+        <button type="reset" class="btn btn-danger my-2" name="create">
+          Reset
+        </button>
+      </form>
+    </div>
+    <!-- Add Event Form -->
+    <!-- Footer -->
+    <%- include('include/Footer')%>
+    <!-- Footer -->
+  </body>
+</html>

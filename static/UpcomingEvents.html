@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    />
+    <!-- custom css -->
+    <!-- <link rel="stylesheet" href="./UpcomingEvents.css" /> -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Upcoming-Events</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header" class="">
+      <nav class="navbar navbar-expand-lg bg-danger px-4">
+        <div class="container-fluid">
+          <i class="fa-solid fa-a"></i>
+          <a class="navbar-brand text-light h1" href="#">AutoMeta</a>
+          <form class="d-flex mx-auto" role="search" id="search-form">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul
+              class="navbar-nav navbar-nav-scroll ms-auto"
+              style="--bs-scroll-height: 100px"
+            >
+              <li class="nav-item">
+                <a class="nav-link text-light" aria-current="page" href="#"
+                  >Events</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="#">Upcoming-Events</a>
+              </li>
+            </ul>
+            <a class="nav-link text-light" href="#"
+              ><div class="btn btn-outline-light">Add Events</div></a
+            >
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- Add Event Form -->
+    <div class="container">
+      <h2 class="text-center pt-4 pb-2">Upcoming-Events</h2>
+      <hr class="bg-dark" />
+      <span class="text-dark h4">Current Months</span>
+      <!-- Event Card -->
+      <div class="flex-row">
+        <div class="d-flex border p-1 my-2">
+          <div class="col-2">
+            <div class="event-date my-2">
+              <div class="event-date__month">month</div>
+              <div class="event-date__day">day</div>
+              <div class="event-date__year">year</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h2 class="my-4">Event Name</h2>
+          </div>
+          <div class="col-2">
+            <h2 class="my-4">Time</h2>
+          </div>
+          <div class="col-2">
+            <div class="my-4 btn btn-danger">Attendance</div>
+          </div>
+        </div>
+      </div>
+      <!-- Event Card -->
+      <!-- Event Card -->
+      <div class="flex-row">
+        <div class="d-flex border p-1 my-2">
+          <div class="col-2">
+            <div class="event-date my-2">
+              <div class="event-date__month">month</div>
+              <div class="event-date__day">day</div>
+              <div class="event-date__year">year</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h2 class="my-4">Event Name</h2>
+          </div>
+          <div class="col-2">
+            <h2 class="my-4">Time</h2>
+          </div>
+          <div class="col-2">
+            <div class="my-4 btn btn-danger">Attendance</div>
+          </div>
+        </div>
+      </div>
+      <!-- Event Card -->
+    </div>
+
+    <!-- Add Event Form -->
+    <!-- scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <!-- scripts -->
+  </body>
+</html>

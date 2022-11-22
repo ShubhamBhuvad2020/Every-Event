@@ -1,0 +1,28 @@
+<% if(Time.length<8){%>
+<!-- variable -->
+<% time = Time.trim(); %>
+<!--  -->
+<% newTime = '' %>
+<!--  -->
+<% arr =time.split(" ") %>
+<!--  -->
+<% arr = arr[0].split(":") %>
+<!--  -->
+<% hh = arr[0] %>
+<!--  -->
+<% mm =arr[1] %>
+<!--  -->
+<% ampm =time.slice(-2) %>
+<!--  -->
+<!--  if -->
+<% if (hh.length==1 & mm.length==2 ){%> <% hh = "0"+hh %> <%}else
+if(hh.length==2 & mm.length==1){ %> <% mm ="0"+mm %> <% }else if (hh.length==1 &
+mm.length==1){ %> <% hh = "0"+hh %> <% mm = "0"+mm %> <% } %>
+<!-- end if -->
+<%= hh+":"+mm+" "+ampm %>
+<!--  -->
+<%}else{%>
+<!--  -->
+<%= Time %>
+<!--  -->
+<%}%>

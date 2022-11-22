@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('include/Header')%>
+    <title>Events</title>
+  </head>
+  <body>
+     <!-- Navbar -->
+     <%-
+     include('include/Navbar',{searchBar:'false',addEventBtn:'false',Events:'false',logoutBtn:'true',Home:'true'})%>
+     <!-- Navbar -->
+    <!-- Detail Event Description-start -->
+    <div class="container-fluid py-5">
+      <!-- Event Title Date And Time -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-2 text-center py-2"><%= event.Ename %></h1>
+          <hr class=" border border-secondary " >
+          <p class="py-2">
+            <div class="d-flex justify-content-between">
+                <div><span class="h4">Date :</span><span class="px-2 h5 text-secondary"><%= moment(event.Edate).format("DD-MM-YYYY") %></span></div>
+                <div><span class="h4">Start Time :</span><span class="px-2 h5 text-secondary"><% Time = to12Hours(event.starttime) %> <%-
+                  include('include/TimeCovnertor',{Time:Time})%> </span></div>
+                <div><span class="h4">End Time :</span><span class="px-2 h5 text-secondary"><% Time = to12Hours(event.endtime) %> <%-
+                  include('include/TimeCovnertor',{Time:Time})%></span></div>
+                <div><span class="h4">
+                  Attendace :
+                </span><h4 class="d-inline px-2 h5 text-secondary"><span class="badge bg-danger ">
+                  <!-- <%= event.id%> -->
+                  <% count=0 %>
+                  <% emp.forEach(e=>{ %>
+                    <% if(e.Eid == event._id) {%>
+                      <% count=count+1 %>
+                    <%}else{%>
+                      <% count %>
+                    <%}%>
+                  <%}) %>
+                  <%= count %>
+                </span></h4 ></div>
+            </div>
+          </p>
+          <br>
+          <!-- filter by platform and unit -->
+          <!-- <div class="row">
+            <div class="col-lg-3">
+              <div class="d-flex flex-row justify-content-between">
+                <h4 class="py-1">Platform:</h4>
+                <div ><select  id="filter-platform" class="form-select" aria-label="Default select example">
+                  <option value="" disabled hidden>Select Platform</option>
+                  <option value=".google-meet">Google Meet</option>
+                  <option value=".cicso-webex">Cisco Webex</option>
+                  <option value=".ms-teams">Microsoft Teams</option>
+                </select></div>
+              </div>
+            </div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+              <div class="d-flex flex-row justify-content-between">
+                <h4 class="py-1">Unit:</h5>
+                <div >
+                  <select  id="filter-unit" class="form-select" aria-label="Default select example">
+                  <option value="" disabled hidden >Select Unit</option>
+                  <option value=".CL-EGC">CL-EGC</option>
+                  <option value=".EGG-EAS">EGG EAS</option>
+                  <option value=".EGG-EAS-NGP">EGG EAS NGP</option>
+                  <option value=".EGG-EAS-Oracle">EGG EAS Oracle</option>
+                  <option value=".EGG-EAS-Salesforce">EGG EAS Salesforce</option>
+                  <option value=".EEG-EAS-SAP">EEG EAS SAP</option>
+                  <option value=".EGG-CMT-Parent">EGG CMT Parent</option>
+                  <option value=".EGG-EAS-Parent">EGG EAS Parent</option>
+                  <option value=".GBU">GBU</option>
+                  <option value=".IS-EGG-1.0">IS EGG 1.0</option>
+                  <option value=".Others1-Parent">Others1 Parent</option>
+                  <option value=".SGB-BFSI-products-Insurance-Adjacencies">SGB-BFSI products Insurance & Adjacencies</option>
+                </select>
+              </div>
+              </div>
+            </div>
+            
+          </div> -->
+          <!-- <div class="col-12 "> -->
+            <input type="search" class="form-control col-12" id="empDetailsSearch" placeholder="Search Anything">
+          <!-- </div> -->
+        </div>
+      </div>
+      <!-- Event Title Date And Time -->
+      <!-- Attendance List-Start -->
+      
+      <div id="Container" class="gridtable text-center container-fluid px-5 w-75" style="padding-top: 40px;">
+        <div class="bg-danger col-12 px-2 text-light h1">Table</div>
+        <table class="table table-striped table-bordered">
+          <thead class="bg-danger text-light ">
+            <tr>
+              <!-- <th>Sr No</th> -->
+              <th>Emp Id</th>
+              <th>Emp Name</th>
+              <th>Emp Email</th>
+              <th>Unit</th>
+              <th>Platform</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="detailTable">
+          <% emp.forEach((e,index)=>{ %>
+            <% if(e.Eid == event._id) {%>
+            <tr>
+            <!-- <td><%= index+1 %></td> -->
+            <td><%= e.EmpId%></td>
+            <td><%= e.EmpName%></td>
+            <td><%= e.EmpEmail%></td>
+            <td><%= e.EmpUnit%></td>
+            <td><%= e.EmpPlatform %></td>
+            <td><%= moment(e.timeCreated).format("h:mm:ss a") %></td>   
+           </tr>
+            <%} %>
+           <%}) %>
+          
+          
+        </table>
+      </div>
+    <!-- Attendance List-End -->
+    </div>
+    <!-- Detail Event Description-end -->
+
+  <!-- scripts -->
+  <%- include('include/Footer')%>
+  <script>
+     $(document).ready(function () {
+      $("#empDetailsSearch").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    $("#detailTable tr").filter(function () {
+      $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1);
+    });
+  });
+    });
+  </script>
+  <!-- scripts -->
+  </body>
+</html>

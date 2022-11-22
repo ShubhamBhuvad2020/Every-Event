@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Header -->
+      <%- include('include/Header')%>
+    <!-- Header -->
+    <title>Attendance</title>
+  </head>
+  <body>
+   <!-- Navbar -->
+   <%-
+   include('include/Navbar',{searchBar:'false',addEventBtn:'false',Events:'false',logoutBtn:'false',Home:'false'})%>
+   <!-- Navbar -->
+   
+    <!-- Attendance Form-start -->
+    <div class="container py-5  " style="width: max-content;" >
+      <form  method="post" action="/attendance/<%= event._id%>" class="shadow p-4 border w-100" >
+        <h2 class="text-center">Attendance Form</h2>
+        <hr />
+        <!-- Render Event Details Automatically -->
+        <div class="jumbotron">
+          <marquee behavior="scroll" direction="right" scrollamount="5"><h1 class="h2 text-danger"><%= event.Ename %></h1></marquee>
+          <p class="lead">
+            <div class="d-flex flex-column">
+              <div class="h6 ">Date : <span class="text-secondary">  <%= moment(event.Edate).format("Do MMM YYYY") %> </span></div>
+              <div class="h6">Time : <span class="text-secondary"><% Time = to12Hours(event.starttime) %> <%-
+                include('include/TimeCovnertor',{Time:Time})%> TO <% Time = to12Hours(event.endtime) %> <%-
+                include('include/TimeCovnertor',{Time:Time})%> </span></div>
+              <div class="h6 text-">Host : <span class="text-secondary"> <%= event.hostname %> </span></div>
+            </div>
+          </p>
+        </div>
+        <!-- Render Event Details Automatically -->
+        <div class="form-group my-2">
+          <label for="empid" class="form-lable">Emp Id  <span class="text-danger">*</span></label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="exampleInputempid"
+            name="empid"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="empname" class="form-lable">Emp Name <span class="text-danger">*</span></label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="exampleInputempname"
+            name="empname"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="Email" class="form-lable">Emp Email <span class="text-danger">*</span></label>
+          <input
+            required
+            type="email"
+            class="form-control"
+            id="exampleInputEmail"
+            name="empemail"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group my-2">
+          <label for="unit" class="form-lable">Unit <span class="text-danger">*</span></label>
+          <select class="form-select"  name="unit" >
+            <option  selected>Select Unit</option>
+            <option  value="CL-EGC">CL-EGC</option>
+            <option  value="EGG-EAS">EGG EAS</option>
+            <option  value="EGG-EAS-NGP">EGG EAS NGP</option>
+            <option  value="EGG-EAS-Oracle">EGG EAS Oracle</option>
+            <option  value="EGG-EAS-Salesforce">EGG EAS Salesforce</option>
+            <option  value="EEG-EAS-SAP">EEG EAS SAP</option>
+            <option  value="EGG-CMT-Parent">EGG CMT Parent</option>
+            <option  value="EGG-EAS-Parent">EGG EAS Parent</option>
+            <option  value="GBU">GBU</option>
+            <option  value="IS-EGG-1.0">IS EGG 1.0</option>
+            <option  value="Others1-Parent">Others1 Parent</option>
+            <option  value="SGB-BFSI-products-Insurance-Adjacencies">SGB-BFSI products Insurance & Adjacencies</option>
+          </select >
+        </div>
+        <div class="form-group my-2">
+          <label for="Platform" class="form-lable">Platform <span class="text-danger">*</span></label>
+          <select class="form-select" name="platform" aria-label="Default select example">
+            <option  selected>select platform</option>
+            <option value="google-meet">Google Meet</option>
+            <option value="cicso-webex">Cisco Webex</option>
+            <option value="ms-teams">Microsoft Teams</option>
+          </select>
+        </div>
+        <a href="/attendance/<%= event._id%>"><button type="submit" class="btn btn-danger my-2" name="create">
+          Submit
+        </button></a>
+      </form>
+    </div>
+    <!-- Attendance Form-end -->
+  
+    <!-- scripts -->
+     <!-- Footer -->
+     <%- include('include/Footer')%>
+     <!-- Footer -->
+    <!-- scripts -->
+  </body>
+</html>
